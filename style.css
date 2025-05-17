@@ -11,8 +11,6 @@ html {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
   background: rgba(252, 245, 229, 1);
   font-family: "Poppins", sans-serif;
   font-weight: 400;
@@ -53,7 +51,7 @@ body {
   padding: 1.875rem 0 1.25rem;
   max-width: 95%;
   margin: 0 auto;
-  border-bottom: 1px solid rgba(33, 33, 33, 0.4);
+  border-bottom: 1px solid #21212166;
 }
 
 .avatar-section {
@@ -143,12 +141,13 @@ body {
   max-width: 95%;
   margin: 0 auto;
 }
+
 /* The container holding the cards */
 .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem 1.3rem;
-  padding: 2.5rem 0;
+  padding: 1.25rem 0 2.5rem;
   width: 100%;
   border-bottom: 1px solid #21212166;
 }
@@ -170,6 +169,7 @@ body {
 .card-description {
   display: flex;
   justify-content: space-between;
+  gap: 0.3125rem;
   padding-top: 1rem;
 }
 
