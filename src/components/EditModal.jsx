@@ -11,16 +11,10 @@ const EditModal = ({
   errors,
 }) => {
   return (
-    <div
-      className="modal"
-      //   id="editModal"
-      role="dialog"
-      aria-label="Edit profile modal"
-    >
+    <div className="modal" role="dialog" aria-label="Edit profile modal">
       <button
         onClick={() => setEditModal(false)}
         className="btn btn-close btn-light"
-        // id="cancelBtn"
       >
         X
       </button>
@@ -38,9 +32,8 @@ const EditModal = ({
             id="editName"
             value={tempName}
             onChange={(e) => setTempName(e.target.value)}
-            placeholder="Enter your name"
+            // placeholder="Enter your name"
             required
-            // minLength="2"
             className={errors.name ? "input-error" : ""}
           />
           {errors.name && <span className="error">{errors.name}</span>}

@@ -1,28 +1,84 @@
-import { HeaderLogic } from "./Header.js";
+import { useState, useEffect } from "react";
+import { z } from "zod";
 import EditModal from "./EditModal";
 
-const Header = () => {
-  const {
-    editModal,
-    setEditModal,
-    name,
-    // setName,
-    description,
-    // setDescription,
-    profileImage,
-    // setprofileImage,
-    tempName,
-    setTempName,
-    tempDescription,
-    setTempDescription,
-    tempImage,
-    setTempImage,
-    errors,
-    // setErrors,
-    openModal,
-    handleSubmit,
-    uploadImage,
-  } = HeaderLogic();
+const profileSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  description: z.string().min(2, "Description must be at least 2 characters"),
+});
+
+const postSchema = z.object({
+  title: z.string().min(2, "Title must be at least 2 characters"),
+  image: z.string().min(1, "Image is required"),
+});
+
+const Header = ({ setPostModal }) => {
+  const [editModal, setEditModal] = useState(false);
+
+  const [name, setName] = useState("Bessie Coleman");
+  const [description, setDescription] = useState("Aviator");
+  const [profileImage, setprofileImage] = useState("/images/avatar.png");
+
+  const [tempName, setTempName] = useState("");
+  const [tempDescription, setTempDescription] = useState("");
+  const [tempImage, setTempImage] = useState("");
+
+  const [errors, setErrors] = useState({});
+
+  const openEditModal = () => {
+    setTempName(name);
+    setTempDescription(description);
+    setTempImage(profileImage);
+    setEditModal(true);
+  };
+
+  const uploadProfileImage = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setTempImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleProfileSubmit = (e) => {
+    e.preventDefault();
+
+    const result = profileSchema.safeParse({
+      name: tempName.trim(),
+      description: tempDescription.trim(),
+    });
+
+    if (!result.success) {
+      const fieldErrors = {};
+      result.error.errors.forEach((err) => {
+        fieldErrors[err.path[0]] = err.message;
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setName(tempName.trim());
+    setDescription(tempDescription.trim());
+    setprofileImage(tempImage);
+    setEditModal(false);
+    setErrors({});
+  };
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") {
+        setEditModal(false);
+        setPostModal(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
 
   return (
     <header role="banner">
@@ -53,19 +109,20 @@ const Header = () => {
             <div className="details">
               <h3 className="name">{name}</h3>
               <p className="description">{description}</p>
-              <button
-                className="btn btn-light"
-                type="button"
-                aria-label="Edit profile"
-                onClick={openModal}
-              >
-                <img src="/icons/edit.svg" alt="edit icon" />
-                Edit Profile
-              </button>
             </div>
+            <button
+              className="btn btn-light"
+              type="button"
+              aria-label="Edit profile"
+              onClick={openEditModal}
+            >
+              <img src="/icons/edit.svg" alt="edit icon" />
+              Edit Profile
+            </button>
           </div>
         </div>
         <button
+          onClick={() => setPostModal(true)}
           type="button"
           className="btn btn-dark"
           id="post-btn"
@@ -80,8 +137,8 @@ const Header = () => {
       {editModal && (
         <EditModal
           setEditModal={setEditModal}
-          onSubmit={handleSubmit}
-          onChange={uploadImage}
+          onSubmit={handleProfileSubmit}
+          onChange={uploadProfileImage}
           tempName={tempName}
           setTempName={setTempName}
           tempDescription={tempDescription}
