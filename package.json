@@ -17,10 +17,20 @@
   "author": "circle-one",
   "type": "module",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "parcel": "^2.15.2"
+    "parcel": "^2.15.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.57.0",
+    "vite": "^6.3.5",
+    "zod": "^3.25.51"
+  },
+  "main": "index.js",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.5.1"
   }
 }
