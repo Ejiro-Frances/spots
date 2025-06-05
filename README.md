@@ -1,33 +1,38 @@
 # 📸 Insta-Spot
 
-### AltSchool Africa – Circle 01 | Assignment 02
+### AltSchool Africa – Spots
 
 A responsive **photo-sharing web page** inspired by platforms like Instagram and Pinterest.
 
-Built collaboratively with **HTML**, **CSS** and **Javascript**, this project focuses on layout precision, team coordination, and desktop-first design.
+Initially built collaboratively with **HTML**, **CSS** and **Javascript**, and converted soley to **React**.
 
 ## Screenshot
 
-![Insta-Spot Screenshot](./assets/images/screenshot.png)
+![Insta-Spot Screenshot](/images/screenshot.png)
 
 ---
 
 ## 🔍 Project Overview
 
-This is the second group assignment in the **Tinyuka Frontend Track** at AltSchool Africa.
-Our goal was to simulate real-world collaboration by working together in a team of 10 students.
+This project was initially assigned to Althschool Frontend Tinuyka students by [Mr. Oluwasetemi Ojo](https://github.com/Oluwasetemi) as a group project.
 
-> **The challenge**: Create a **profile page** with a photo grid, user section, and minimal interactions.
+After building together as a group, we were asked to individually convert it to a React project.
+
+> **First challenge**: Create a **profile page** with a photo grid, and minimal interactions like edit profile and make new post which reflects in the photo grid section, also make the images previewable in a modal and do this collaboratively as a group.
+
+**Next Challenge**: Convert the project to a React app
+
+---
 
 ### 🌐 Live Demo
 
-🔗 [View Insta-Spot Live on Netlify](https://insta-spot-circle-01.netlify.app/)
+🔗 [View Insta-Spot Live on Pipeops](https://spots.pipeops.net/)
 
 ---
 
 ## 🛠 Tech Stack
 
-- HTML5
+- React with Vite
 - CSS3 (Flexbox + Grid)
 - Javascript
 
@@ -35,7 +40,7 @@ Our goal was to simulate real-world collaboration by working together in a team 
 
 ## 📁 Features
 
-- 👤 **User Profile**: Name, role, and avatar
+- 👤 **User Profile**: Name, description, and avatar
 - ➕ **"New Post" Button**: User can add a new post containing an image and a title.
 - ✏️ **"Edit Profile" Button**: User can edit the profile name, description and image.
 - 🖼 **Responsive Gallery**: CSS grid layout for dynamic resizing
@@ -44,37 +49,21 @@ Our goal was to simulate real-world collaboration by working together in a team 
 
 ---
 
-### ✅ Project Status
-
-- [x] Pixel perfect design complete
-- [x] Responsive
-- [x] JavaScript functionality
-
----
-
-## 🔧 To Be Added
-
-Implement JavaScript functionality to save and delete posts to and from local storage
-
----
-
 ## 💻 How to Run Locally
-
-You can run this project locally in your browser with zero dependencies.
 
 ```bash
 # Clone the repository
-git clone https://github.com/Reuben-10/altschool-circle1-insta-spot-assignment-02.git
+git clone https://github.com/Ejiro-Frances/spots.git
 
 # Navigate into the project folder
-cd altschool-circle1-insta-spot-assignment-02
+cd spots
 
-# Open the HTML file in your browser
-open index.html
-# Or right-click and choose "Open with Browser"
+# install modules
+npm install
+
+# run in the browser
+npm run dev
 ```
-
-> 📝 No installation, package manager, or server required.
 
 ---
 
@@ -88,7 +77,7 @@ open index.html
 
 ## 👥 Team
 
-We are a team of _10 passionate learners_ from **AltSchool Africa Tinyuka School of Enginnering**, collaborating to build this project from scratch.
+A team of _10 passionate learners_ from **AltSchool Africa Tinyuka School of Enginnering**, collaborated on the first version of this project.
 
 - Ejiro Francess Ejoh
 - Reuben Agbor
