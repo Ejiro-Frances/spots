@@ -1,28 +1,22 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import EditModal from "./EditModal";
+import { MdEdit } from "react-icons/md";
 
 const profileSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   description: z.string().min(2, "Description must be at least 2 characters"),
 });
 
-const postSchema = z.object({
-  title: z.string().min(2, "Title must be at least 2 characters"),
-  image: z.string().min(1, "Image is required"),
-});
-
-const Header = ({ setPostModal }) => {
+const Header = ({ setPostModal, setPostErrors }) => {
   const [editModal, setEditModal] = useState(false);
-
   const [name, setName] = useState("Bessie Coleman");
   const [description, setDescription] = useState("Aviator");
   const [profileImage, setprofileImage] = useState("/images/avatar.png");
-
   const [tempName, setTempName] = useState("");
   const [tempDescription, setTempDescription] = useState("");
   const [tempImage, setTempImage] = useState("");
-
   const [errors, setErrors] = useState({});
 
   const openEditModal = () => {
@@ -71,6 +65,8 @@ const Header = ({ setPostModal }) => {
       if (e.key === "Escape") {
         setEditModal(false);
         setPostModal(false);
+        setErrors({});
+        setPostErrors({});
       }
     };
 
@@ -81,23 +77,22 @@ const Header = ({ setPostModal }) => {
   }, []);
 
   return (
-    <header role="banner">
+    <header className="header">
       <nav className="logo-container" aria-label="Logo container">
-        <a href="#" className="logo" aria-label="Go to homepage">
+        <Link to="/" className="logo" aria-label="Go to homepage">
           <img
             src="/icons/spot-logo.svg"
             alt="Insta-spot logo and home-page link"
           />
           <span className="logo-text">SPOTS</span>
-        </a>
+        </Link>
       </nav>
 
       {/* news column */}
       <div className="banner" aria-label="User profile banner">
         <div
-          className="avatar-section"
-          role="group"
-          aria-label="User information"
+          className="avatar-image-container"
+          aria-label="Avatar image container"
         >
           <img
             className="avatar-img"
@@ -105,32 +100,32 @@ const Header = ({ setPostModal }) => {
             alt={`Profile image of ${name}`}
             loading="lazy"
           />
-          <div className="properties">
-            <div className="details">
-              <h3 className="name">{name}</h3>
-              <p className="description">{description}</p>
-            </div>
+        </div>
+        <div className="avatar-information">
+          <div className="details">
+            <h3 className="name">{name}</h3>
+            <p className="description">{description}</p>
+          </div>
+          <div className="btns">
             <button
               className="btn btn-light"
-              type="button"
               aria-label="Edit profile"
               onClick={openEditModal}
             >
-              <img src="/icons/edit.svg" alt="edit icon" />
+              <MdEdit />
               Edit Profile
+            </button>
+            <button
+              onClick={() => setPostModal(true)}
+              type="button"
+              className="btn btn-dark"
+              id="post-btn"
+              aria-label="Create new post"
+            >
+              + New Post
             </button>
           </div>
         </div>
-        <button
-          onClick={() => setPostModal(true)}
-          type="button"
-          className="btn btn-dark"
-          id="post-btn"
-          aria-label="Create new post"
-        >
-          <img src="/icons/plus.svg" alt="+" />
-          New Post
-        </button>
       </div>
 
       {/* edit modal */}
@@ -144,8 +139,8 @@ const Header = ({ setPostModal }) => {
           tempDescription={tempDescription}
           setTempDescription={setTempDescription}
           tempImage={tempImage}
-          setTempImage={setTempImage}
           errors={errors}
+          setErrors={setErrors}
         />
       )}
     </header>

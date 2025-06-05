@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { z } from "zod";
 import Header from "./components/Header.jsx";
 import PostModal from "./components/PostModal.jsx";
 import { cardsData } from "./components/CardData.js";
 import Gallery from "./components/Gallery.jsx";
 import Footer from "./components/Footer.jsx";
+
+const postSchema = z.object({
+  title: z.string().min(2, "Title must be at least 2 characters"),
+  image: z.string().min(1, "Image is required"),
+});
 
 const App = () => {
   const [postModal, setPostModal] = useState(false);
@@ -24,9 +30,25 @@ const App = () => {
   const handlePostSubmit = (e) => {
     e.preventDefault();
 
+    const result = postSchema.safeParse({
+      title: postTitle.trim(),
+      image: postImage,
+    });
+
+    if (!result.success) {
+      const fieldErrors = {};
+      result.error.errors.forEach((postErr) => {
+        fieldErrors[postErr.path[0]] = postErr.message;
+      });
+      setPostErrors(fieldErrors);
+      return;
+    }
+
     const newPost = {
+      id: Date.now(),
       imgSrc: postImage,
       imgAlt: postTitle,
+      like: 0,
       title: postTitle,
     };
 
@@ -36,9 +58,10 @@ const App = () => {
     setPostErrors({});
     setPostModal(false);
   };
+
   return (
     <>
-      <Header setPostModal={setPostModal} />
+      <Header setPostModal={setPostModal} setPostErrors={setPostErrors} />
       <PostModal
         postModal={postModal}
         setPostModal={setPostModal}
@@ -48,6 +71,7 @@ const App = () => {
         uploadPostImage={uploadPostImage}
         handlePostSubmit={handlePostSubmit}
         postErrors={postErrors}
+        setPostErrors={setPostErrors}
       />
       <Gallery allCards={[...userPosts, ...cardsData]} />
       <Footer />
