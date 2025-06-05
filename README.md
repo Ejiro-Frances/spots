@@ -8,7 +8,7 @@ Initially built collaboratively with **HTML**, **CSS** and **Javascript**, and c
 
 ## Screenshot
 
-![Insta-Spot Screenshot](/images/screenshot.png)
+![Insta-Spot Screenshot](public/images/screenshot.png)
 
 ---
 
@@ -69,9 +69,9 @@ npm run dev
 
 ## 📸 Screenshots
 
-| 🖥️ Desktop View                  | 📱 Mobile View                 |
-| -------------------------------- | ------------------------------ |
-| ![Desktop](./assets/Desktop.png) | ![Mobile](./assets/Mobile.png) |
+| 🖥️ Desktop View                | 📱 Mobile View               |
+| ------------------------------ | ---------------------------- |
+| ![Desktop](public/Desktop.png) | ![Mobile](public/Mobile.png) |
 
 ---
 
